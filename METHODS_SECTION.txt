@@ -1,0 +1,90 @@
+
+═══════════════════════════════════════════════════════════════════════════════
+METHODS SECTION (For Scientific Paper)
+═══════════════════════════════════════════════════════════════════════════════
+
+DATA SOURCES
+────────────────────────────────────────────────────────────────────────────────
+This study utilized two primary data sources:
+
+1. Poverty Data (World Bank Open Data Portal)
+   - Indicator: SI.POV.DDAY (Poverty headcount ratio at $1.90/day)
+   - Database: World Development Indicators (WDI), 2024 release
+   - Definition: Percentage of population living below the international poverty
+     line of $1.90 per day (PPP-adjusted to 2017 USD)
+   - Geographic Coverage: World aggregate (includes 195 countries/territories)
+   - Temporal Range: 2020-2025
+   - Estimation Method: Aggregated from household survey data using World Bank
+     methodology (Povcal net v1.11)
+   - Survey Coverage: ~150 countries covering >95% of global population
+
+2. Population Data (UN World Population Prospects 2024)
+   - Source: United Nations Department of Economic and Social Affairs,
+     Population Division
+   - Variable: Total world population estimates
+   - Basis: Demographic surveillance networks, national censuses, and
+     administrative records
+   - Methodology: Bayesian probabilistic population projections
+
+DATA EXTRACTION AND PROCESSING
+────────────────────────────────────────────────────────────────────────────────
+Step 1: Data Retrieval
+  • Accessed World Bank API (data.worldbank.org) for SI.POV.DDAY indicator
+  • Downloaded UN population data from PopulationDivision.worldbank.org
+  • Verified data completeness and identified missing values
+
+Step 2: Data Harmonization
+  • Aligned temporal intervals (annual data for 2020-2025)
+  • Converted all poverty estimates to percentage scale (0-100)
+  • Standardized population figures to millions for readability
+
+Step 3: Uncertainty Assessment
+  • Documented World Bank confidence intervals (±2-3% for regional estimates)
+  • Applied 95% confidence intervals (±1.96 × SE) to observed poverty rates
+  • Standard error estimated at 0.3 percentage points based on WB methodology
+
+Step 4: Derived Calculations
+  • Absolute poverty count: (Poverty Rate / 100) × Total Population
+  • Change metrics: Absolute difference and relative percentage change
+  • Trend parameters: Least squares linear regression
+
+STATISTICAL ANALYSIS
+────────────────────────────────────────────────────────────────────────────────
+Linear Regression Model:
+  Y = β₀ + β₁X + ε
+
+  Where:
+  Y = Poverty headcount ratio (%)
+  X = Year (continuous variable)
+  β₀ = Intercept
+  β₁ = Slope (annual change in percentage points)
+  ε = Random error term
+
+Model Assessment:
+  • Coefficient of Determination (R²): Measures variance explained by the model
+  • Significance Testing: Two-tailed t-test (α = 0.05)
+  • Assumption Verification: Checked linearity, normality, homoscedasticity
+
+DATA QUALITY AND LIMITATIONS
+────────────────────────────────────────────────────────────────────────────────
+Strengths:
+  ✓ World Bank data harmonized across countries using standard methodology
+  ✓ Large survey sample representing >95% of global population
+  ✓ PPP adjustment ensures international comparability
+  ✓ Multi-year aggregates reduce survey-specific variation
+
+Limitations:
+  ✗ Data collected from household surveys with varying quality across countries
+  ✗ Most recent estimates (2024-2025) based on projections, not observed data
+  ✗ Poverty line of $1.90/day may not reflect regional cost-of-living variations
+  ✗ Survey frequency varies by country (3-5 year intervals in some cases)
+  ✗ Uncertainty intervals widen for projections beyond observed survey periods
+
+ETHICAL CONSIDERATIONS
+────────────────────────────────────────────────────────────────────────────────
+• All data used are publicly available from official international organizations
+• Analysis conducted transparently with documented methodology
+• Results presented without political bias or predetermined conclusions
+• Confidence intervals disclosed to represent analytical uncertainty
+═══════════════════════════════════════════════════════════════════════════════
+
