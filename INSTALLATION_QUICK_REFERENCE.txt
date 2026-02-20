@@ -1,0 +1,195 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║          RStudio Server Installation - Quick Reference Card                  ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+
+┌─ STEP-BY-STEP QUICK GUIDE ──────────────────────────────────────────────────┐
+│                                                                               │
+│  1️⃣  DOWNLOAD & RUN THE INSTALLER                                           │
+│      ──────────────────────────────────────────────────────────────────────  │
+│      bash /home/user/test/setup_rstudio_server.sh                           │
+│                                                                               │
+│      ⏱️  Time: 10-20 minutes                                                 │
+│      🎯 This installs: R + RStudio Server + 20+ packages                    │
+│                                                                               │
+├───────────────────────────────────────────────────────────────────────────────┤
+│                                                                               │
+│  2️⃣  WAIT FOR INSTALLATION TO COMPLETE                                      │
+│      ──────────────────────────────────────────────────────────────────────  │
+│      Watch for: ✓ markers appear as each step completes                     │
+│      Don't: Close terminal or press Ctrl+C                                  │
+│                                                                               │
+│      When done, you'll see:                                                 │
+│      ✓ R installed                                                           │
+│      ✓ RStudio Server installed                                             │
+│      ✓ Packages installed                                                    │
+│      ✓ Service running                                                       │
+│                                                                               │
+├───────────────────────────────────────────────────────────────────────────────┤
+│                                                                               │
+│  3️⃣  VERIFY INSTALLATION                                                    │
+│      ──────────────────────────────────────────────────────────────────────  │
+│      sudo systemctl status rstudio-server                                   │
+│                                                                               │
+│      ✅ Should see: "Active: active (running)"                              │
+│                                                                               │
+├───────────────────────────────────────────────────────────────────────────────┤
+│                                                                               │
+│  4️⃣  OPEN RSTUDIO SERVER IN WEB BROWSER                                     │
+│      ──────────────────────────────────────────────────────────────────────  │
+│      Go to: http://localhost:8787                                           │
+│                                                                               │
+│      🌐 Supported browsers: Chrome, Firefox, Safari, Edge                   │
+│      🌐 On same network: http://<your-ip>:8787                             │
+│      🌐 Secure tunnel: ssh -L 8787:localhost:8787 user@server              │
+│                                                                               │
+├───────────────────────────────────────────────────────────────────────────────┤
+│                                                                               │
+│  5️⃣  LOGIN WITH YOUR SYSTEM CREDENTIALS                                     │
+│      ──────────────────────────────────────────────────────────────────────  │
+│      Username: Your Linux username                                          │
+│      Password: Your Linux password                                          │
+│                                                                               │
+│      To find your username: whoami                                          │
+│      To change password: sudo passwd yourname                              │
+│                                                                               │
+├───────────────────────────────────────────────────────────────────────────────┤
+│                                                                               │
+│  6️⃣  START USING RSTUDIO                                                    │
+│      ──────────────────────────────────────────────────────────────────────  │
+│      ✓ R console is ready (bottom-left)                                    │
+│      ✓ All packages pre-installed                                           │
+│      ✓ Can create new projects (File → New Project)                        │
+│      ✓ Can create R scripts (File → New File → R Script)                   │
+│                                                                               │
+│      Test it works:                                                         │
+│      > 2 + 2                                                                │
+│      [1] 4                                                                   │
+│                                                                               │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+
+┌─ WHAT'S INSTALLED ──────────────────────────────────────────────────────────┐
+│                                                                               │
+│  Software:                                                                   │
+│  • R (statistical computing)                                                │
+│  • RStudio Server (web-based IDE)                                           │
+│  • Build tools (gcc, gfortran, etc.)                                       │
+│                                                                               │
+│  R Packages:                                                                │
+│  • Data Science: tidyverse, dplyr, tidyr, ggplot2, data.table             │
+│  • Visualization: ggvis, lattice                                           │
+│  • Web/Interactive: shiny, rmarkdown, markdown, knitr                      │
+│  • Development: devtools, testthat, xtable                                │
+│  • Utilities: magrittr, lubridate, stringr, Matrix                        │
+│                                                                               │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+
+┌─ COMMON COMMANDS ───────────────────────────────────────────────────────────┐
+│                                                                               │
+│  Starting/Stopping Service:                                                 │
+│  $ sudo systemctl start rstudio-server                                      │
+│  $ sudo systemctl stop rstudio-server                                       │
+│  $ sudo systemctl restart rstudio-server                                    │
+│  $ sudo systemctl status rstudio-server                                     │
+│                                                                               │
+│  Check Installation:                                                        │
+│  $ R --version                        (Check R version)                     │
+│  $ sudo netstat -tlnp | grep 8787     (Check port 8787)                   │
+│  $ whoami                              (Check username)                      │
+│                                                                               │
+│  In RStudio Console (R commands):                                           │
+│  > install.packages("package_name")  (Install new package)                 │
+│  > library(tidyverse)                (Load package)                        │
+│  > help("function_name")             (Get help)                            │
+│  > ?package_name                     (Package documentation)               │
+│                                                                               │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+
+┌─ TROUBLESHOOTING ───────────────────────────────────────────────────────────┐
+│                                                                               │
+│  ❌ "Cannot connect to http://localhost:8787"                              │
+│  ✅ sudo systemctl status rstudio-server                                    │
+│  ✅ sudo systemctl start rstudio-server                                     │
+│  ✅ Wait 10 seconds and try again                                           │
+│                                                                               │
+│  ❌ "Login fails with invalid username/password"                            │
+│  ✅ Check username: whoami                                                  │
+│  ✅ Reset password: sudo passwd yourname                                    │
+│  ✅ Create new user: sudo useradd -m newuser                               │
+│                                                                               │
+│  ❌ "Port 8787 already in use"                                             │
+│  ✅ sudo lsof -i :8787                  (Find what's using it)             │
+│  ✅ sudo kill -9 <PID>                  (Kill the process)                 │
+│  ✅ sudo systemctl restart rstudio-server                                   │
+│                                                                               │
+│  ❌ "R takes forever to load"                                               │
+│  ✅ sudo systemctl restart rstudio-server                                   │
+│  ✅ Clear browser cache and refresh (Ctrl+Shift+Delete)                    │
+│  ✅ Try different browser                                                   │
+│                                                                               │
+│  For more help: See INSTALLATION_WALKTHROUGH.md                            │
+│                                                                               │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+
+┌─ RSTUDIO KEYBOARD SHORTCUTS ────────────────────────────────────────────────┐
+│                                                                               │
+│  Ctrl + Enter              Run current line/selection                       │
+│  Ctrl + Shift + Enter      Run entire script                               │
+│  Ctrl + /                  Toggle comment                                   │
+│  Tab                       Auto-complete                                    │
+│  Alt + -                   Insert <- (assignment operator)                  │
+│  Alt + Shift + K           Show all keyboard shortcuts                      │
+│                                                                               │
+│  File Operations:                                                           │
+│  Ctrl + N                  New document                                     │
+│  Ctrl + O                  Open file                                        │
+│  Ctrl + S                  Save file                                        │
+│  Ctrl + Shift + S          Save all open files                             │
+│                                                                               │
+│  Navigation:                                                                │
+│  Ctrl + L                  Clear console                                    │
+│  Ctrl + 1                  Focus on source editor                           │
+│  Ctrl + 2                  Focus on console                                 │
+│  Ctrl + Tab                Switch between tabs                              │
+│                                                                               │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+
+┌─ FIRST TIME IN RSTUDIO ─────────────────────────────────────────────────────┐
+│                                                                               │
+│  1. Test R is working:                                                      │
+│     > 2 + 2                                                                 │
+│     [1] 4                                                                    │
+│                                                                               │
+│  2. Load a package:                                                         │
+│     > library(ggplot2)                                                      │
+│     ✓ If no error, package is working                                      │
+│                                                                               │
+│  3. Create new project:                                                     │
+│     File → New Project → New Directory → Empty Project                     │
+│                                                                               │
+│  4. Create R script:                                                        │
+│     File → New File → R Script                                             │
+│                                                                               │
+│  5. Try some code:                                                          │
+│     library(ggplot2)                                                        │
+│     x <- 1:10                                                               │
+│     y <- rnorm(10)                                                          │
+│     plot(x, y)                                                              │
+│                                                                               │
+│     Then click Run (Ctrl+Enter)                                             │
+│                                                                               │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+
+╔════════════════════════════════════════════════════════════════════════════╗
+║                        YOU'RE READY TO GO! 🚀                               ║
+║                                                                              ║
+║              Run the installer, then visit http://localhost:8787            ║
+║                                                                              ║
+║        For detailed walkthrough, see: INSTALLATION_WALKTHROUGH.md           ║
+╚════════════════════════════════════════════════════════════════════════════╝
